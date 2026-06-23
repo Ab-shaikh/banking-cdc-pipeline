@@ -1,0 +1,27 @@
+# Environment variables (sensitive)
+.env
+
+# Terraform sensitive/generated files
+terraform/terraform.tfvars
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+
+# SSH keys
+*.pem
+
+# dbt build artifacts
+dbt_project/target/
+dbt_project/logs/
+dbt_project/dbt_packages/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db

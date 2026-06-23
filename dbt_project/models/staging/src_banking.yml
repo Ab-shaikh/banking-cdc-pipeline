@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: banking_raw
+    database: BANKING_DWH
+    schema: RAW
+    tables:
+      - name: raw_transactions
+      - name: raw_accounts
+      - name: raw_branches
+      - name: raw_customers
