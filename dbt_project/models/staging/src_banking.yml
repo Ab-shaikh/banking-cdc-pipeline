@@ -4,8 +4,14 @@ sources:
   - name: banking_raw
     database: BANKING_DWH
     schema: RAW
+    config:
+      loaded_at_field: _loaded_at
+      freshness:
+        warn_after: {count: 1, period: hour}
+        error_after: {count: 6, period: hour}
     tables:
       - name: raw_transactions
       - name: raw_accounts
       - name: raw_branches
       - name: raw_customers
+

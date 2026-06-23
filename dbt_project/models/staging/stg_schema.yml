@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    description: "Flattened CDC events for the transactions table"
+    columns:
+      - name: transaction_id
+        description: "Primary key from source"
+        tests:
+          - not_null
+      - name: account_id
+        tests:
+          - not_null
+      - name: transaction_type
+        tests:
+          - accepted_values:
+              arguments: # <-- Changed from 'argument' to 'arguments'
+                values: ['CR', 'DR']
+      - name: cdc_operation
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['r', 'c', 'u', 'd']
+
+  - name: stg_accounts
+    description: "Flattened CDC events for the accounts table"
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: branch_id
+        tests:
+          - not_null
+      - name: account_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['SAVINGS', 'CURRENT']
+
+  - name: stg_branches
+    description: "Flattened CDC events for the branches table"
+    columns:
+      - name: branch_id
+        tests:
+          - not_null
+
+  - name: stg_customers
+    description: "Flattened CDC events for the customers table"
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+      - name: pan_number
+        tests:
+          - not_null

@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: fct_transactions
+    description: "Fact table of banking transactions"
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_accounts')
+                field: account_id
+      - name: data_quality_flag
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['VALID', 'CORRUPT_LEGACY_RECORD']
+
+  - name: dim_accounts
+    description: "Dimension table for accounts"
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+          - unique
+      - name: branch_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_branches')
+                field: branch_id
+      - name: customer_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+  - name: dim_branches
+    description: "Dimension table for branches"
+    columns:
+      - name: branch_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_customers
+    description: "Dimension table for customers"
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+      - name: pan_number
+        tests:
+          - unique
