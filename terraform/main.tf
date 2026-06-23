@@ -68,7 +68,7 @@ data "aws_iam_instance_profile" "existing_profile" {
 # Get latest Ubuntu 24.04 AMI
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["099720109477"]  # Canonical
+  owners      = ["099720109477"] # Canonical
 
   filter {
     name   = "name"
@@ -94,11 +94,11 @@ resource "aws_instance" "cdc_lab_ec2" {
     volume_type = "gp3"
   }
 
- user_data = templatefile("${path.module}/user_data.sh.tpl", {
-  s3_bucket_name = var.s3_bucket_name
-})
+  user_data = templatefile("${path.module}/user_data.sh.tpl", {
+    s3_bucket_name = var.s3_bucket_name
+  })
 
-tags = {
+  tags = {
     Name = "cdc-lab-terraform"
   }
 }
