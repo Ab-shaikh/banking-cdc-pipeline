@@ -26,3 +26,8 @@ variable "iam_role_name" {
   type        = string
   default     = "s3_access_ec2"
 }
+
+variable "s3_bucket_name" {
+  description = "S3 bucket name for CDC pipeline raw data"
+  type        = string
+}

@@ -94,9 +94,11 @@ resource "aws_instance" "cdc_lab_ec2" {
     volume_type = "gp3"
   }
 
-  user_data = file("${path.module}/user_data.sh")
+ user_data = templatefile("${path.module}/user_data.sh.tpl", {
+  s3_bucket_name = var.s3_bucket_name
+})
 
-  tags = {
+tags = {
     Name = "cdc-lab-terraform"
   }
 }

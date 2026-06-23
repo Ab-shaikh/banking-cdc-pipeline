@@ -1,0 +1,6 @@
+aws_region     = "ap-south-1"
+instance_type  = "m7i-flex.large"
+key_pair_name  = "your-key-pair-name"
+my_ip          = "YOUR_IP_HERE/32"
+iam_role_name  = "your-iam-role-name"
+s3_bucket_name = "your-s3-bucket-name"
