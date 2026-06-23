@@ -19,11 +19,10 @@ SELECT
 FROM {{ ref('stg_transactions') }}
 
 {% if is_incremental() %}
-  -- Incremental filter for performance
+    
   WHERE transaction_time > (SELECT MAX(transaction_time) FROM {{ this }})
 {% endif %}
 
--- Is ek line se batch ke saare duplicates filter ho jayenge!
 QUALIFY ROW_NUMBER() OVER (
     PARTITION BY transaction_id 
     ORDER BY transaction_time DESC
